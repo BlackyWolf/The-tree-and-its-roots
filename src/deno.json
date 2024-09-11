@@ -1,0 +1,57 @@
+{
+    "lock": false,
+    "tasks": {
+        "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+        "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
+        "manifest": "deno task cli manifest $(pwd)",
+        "start": "deno run -A --unstable-ffi --watch=static/,routes/ dev.ts",
+        "build": "deno run -A --unstable-ffi dev.ts build",
+        "preview": "deno run -A --unstable-ffi main.ts",
+        "update": "deno run -A -r https://fresh.deno.dev/update ."
+    },
+    "fmt": {
+        "indentWidth": 4
+    },
+    "lint": {
+        "rules": {
+            "tags": [
+                "fresh",
+                "recommended"
+            ]
+        }
+    },
+    "exclude": [
+        "**/_fresh/*"
+    ],
+    "imports": {
+        "$fresh/": "https://deno.land/x/fresh@1.6.8/",
+        "$std/": "https://deno.land/std@0.216.0/",
+        "@blackywolf/formdata-to-object": "jsr:@blackywolf/formdata-to-object@^0.1.2",
+        "@felix/argon2": "jsr:@felix/argon2@^1.0.7",
+        "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
+        "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
+        "@std/encoding": "jsr:@std/encoding@^1.0.4",
+        "@std/http": "jsr:@std/http@^1.0.5",
+        "@superstruct/core": "jsr:@superstruct/core@^2.0.2",
+        "@tailwindcss/forms": "npm:@tailwindcss/forms@^0.5.9",
+        "cytoscape": "npm:cytoscape@3.30.2",
+        "postgres": "https://deno.land/x/postgres@v0.19.3/mod.ts",
+        "preact": "https://esm.sh/preact@10.19.6",
+        "preact/": "https://esm.sh/preact@10.19.6/",
+        "tailwindcss": "npm:tailwindcss@3.4.1",
+        "tailwindcss/": "npm:/tailwindcss@3.4.1/",
+        "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
+        "~components": "./components/index.ts",
+        "~data": "./data/index.ts",
+        "~islands": "./islands/index.ts",
+        "~utils": "./utilities/index.ts"
+    },
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact"
+    },
+    "nodeModulesDir": true,
+    "unstable": [
+        "temporal"
+    ]
+}

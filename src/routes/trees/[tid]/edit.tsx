@@ -1,12 +1,25 @@
-import { FreshContext, Handlers } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { CheckBox, ErrorMessage, H, Input, TextArea } from "~components";
 import { assertFormData, FormResult, isFormRequest } from "~utils";
-import { addTree, AppState, getTree, UpdateTree } from "~data";
+import { AppState, getTree, updateTree, UpdateTree } from "~data";
 
-export const handler: Handlers<unknown, AppState> = {
-    GET: async (_request, context) => await context.render({ errors: {}, formData: {} }),
+export const handler: Handlers<FormResult<UpdateTree>, AppState> = {
+    GET: async (_request, context) => {
+        const { user } = context.state;
+        const { tid } = context.params;
+
+        const tree = await getTree(user.id, BigInt(tid));
+
+        return await context.render({
+            errors: {},
+            formData: { ...tree },
+        });
+    },
     async POST(request, context) {
         if (!isFormRequest(request)) return new Response(null, { status: 404 });
+
+        const { user } = context.state;
+        const { tid } = context.params;
 
         const { errors, model } = assertFormData(await request.formData(), UpdateTree);
 
@@ -14,23 +27,19 @@ export const handler: Handlers<unknown, AppState> = {
             return await context.render({ errors, formData: model });
         }
 
-        const tree = await updateTree({ ...model, userId: context.state.user.id });
+        const tree = await updateTree(user.id, { ...model, id: BigInt(tid) });
 
         return new Response(null, {
             headers: {
                 Location: `/trees/${tree.id}`,
             },
-            status: 303,
+            status: 302,
         });
     },
 };
 
-export default async function (_request: Request, context: FreshContext<AppState, FormResult<UpdateTree>>) {
-    const { user } = context.state;
-    const { tid } = context.params;
-    const { errors, formData } = context.data;
-
-    const tree = await getTree(user.id, BigInt(tid));
+export default function ({ data }: PageProps<FormResult<UpdateTree>>) {
+    const { errors, formData } = data;
 
     return (
         <form method="POST" class="m-auto bg-white border-4 border-yellow-950 rounded p-8 space-y-6 md:min-w-[600px]">
@@ -40,20 +49,20 @@ export default async function (_request: Request, context: FreshContext<AppState
 
             <Input
                 autocomplete="name"
-                defaultValue={formData.name || tree.name}
+                defaultValue={formData.name}
                 label="Name"
                 name="name"
                 required
             />
 
             <CheckBox
-                defaultChecked={formData.public || tree.public}
+                defaultChecked={formData.public}
                 label="Public"
                 name="public"
             />
 
             <TextArea
-                defaultValue={formData.description || tree.description}
+                defaultValue={formData.description}
                 label="Description"
                 name="description"
             />

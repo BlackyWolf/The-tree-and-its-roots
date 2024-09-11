@@ -36,7 +36,7 @@ export const handler: Handlers = {
         });
 
         setCookie(headers, {
-            domain: appUrl().includes("localhost") ? undefined : appUrl(),
+            domain: appUrl(),
             expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 30)),
             httpOnly: true,
             name: "auth",

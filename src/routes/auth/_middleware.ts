@@ -8,6 +8,7 @@ export const handler: MiddlewareHandler[] = [
 
         const cookies = getCookies(request.headers);
 
+        //  If user has auth cookie, redirect to home page
         if (cookies["auth"]) {
             return new Response(null, {
                 headers: {

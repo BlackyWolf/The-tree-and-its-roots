@@ -1,9 +1,22 @@
-import { FreshContext, Handlers } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { H } from "~components";
-import { AppState, deleteTree, getTree } from "~data";
+import { AppState, deleteTree, getTree, Tree } from "~data";
 
-export const handler: Handlers<unknown, AppState> = {
-    GET: (_request, context) => context.render(),
+interface PageData {
+    tree: Tree;
+}
+
+export const handler: Handlers<PageData, AppState> = {
+    async GET(_request, context) {
+        const { user } = context.state;
+        const { tid } = context.params;
+
+        if (!user.id || !tid) return new Response(null, { status: 404 });
+
+        const tree = await getTree(user.id, BigInt(tid));
+
+        return context.render({ tree });
+    },
     async POST(_request, context) {
         const { user } = context.state;
         const { tid } = context.params;
@@ -19,11 +32,8 @@ export const handler: Handlers<unknown, AppState> = {
     }
 };
 
-export default async function DeleteTree(_request: Request, context: FreshContext<AppState>) {
-    const { user } = context.state;
-    const { tid } = context.params;
-
-    const tree = await getTree(user.id, BigInt(tid));
+export default function DeleteTree({ data }: PageProps<PageData>) {
+    const { tree } = data;
 
     return (
         <>

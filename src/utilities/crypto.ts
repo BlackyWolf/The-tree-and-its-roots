@@ -4,6 +4,14 @@ import { hashLength, /*hashSecret,*/ iterations, memoryCost, parallelism } from 
 
 let csrfKey: CryptoKey;
 
+/**
+ * Doesn't work, don't use yet.
+ *
+ * @param userId
+ * @returns
+ *
+ * @deprecated
+ */
 export async function generateCsrfToken(userId: string): Promise<string> {
     if (!csrfKey) {
         csrfKey = await crypto.subtle.generateKey(

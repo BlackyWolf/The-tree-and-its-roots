@@ -1,11 +1,23 @@
-import { FreshContext } from "$fresh/server.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { Badge, H, Icon } from "~components";
-import { AppState, getTrees } from "~data";
+import { AppState, getTrees, Tree } from "~data";
 
-export default async function Trees(_request: Request, context: FreshContext<AppState>) {
-    const { user } = context.state;
+interface PageData {
+    trees: Tree[];
+}
 
-    const trees = await getTrees(user.id);
+export const handler: Handlers<PageData, AppState> = {
+    async GET(_request, context) {
+        const { user } = context.state;
+
+        const trees = await getTrees(user.id) || [];
+
+        return context.render({ trees });
+    }
+};
+
+export default function Trees({ data }: PageProps<PageData>) {
+    const { trees } = data;
 
     return (
         <>

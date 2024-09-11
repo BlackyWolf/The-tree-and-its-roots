@@ -1,4 +1,4 @@
-import { NewTree, Tree, useDb } from "~data";
+import { NewTree, Tree, UpdateTree, useDb } from "~data";
 
 export async function addTree(newTree: NewTree): Promise<Tree> {
     const db = await useDb();
@@ -58,4 +58,23 @@ export async function getTreeNames(userId: string): Promise<Tree[]> {
     );
 
     return result.rows;
+}
+
+export async function updateTree(userId: string, updatedTree: UpdateTree): Promise<Tree> {
+    const db = await useDb();
+
+    const result = await db.queryObject<Tree>(
+        "UPDATE trees "
+        + "SET name = $NAME, description = $DESCRIPTION, public = $PUBLIC "
+        + "WHERE id = $ID AND user_id = $USER_ID ",
+        {
+            id: updatedTree.id,
+            name: updatedTree.name,
+            description: updatedTree.description,
+            public: updatedTree.public,
+            user_id: userId,
+        }
+    );
+
+    return result.rows[0];
 }

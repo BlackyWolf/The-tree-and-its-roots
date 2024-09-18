@@ -1,5 +1,5 @@
-import { joinCss } from "~utils";
 import { ComponentChildren } from "preact";
+import { joinCss } from "~utils/css.ts";
 
 type HeadingSize = "1" | "2" | "3" | "4" | "5" | "6";
 

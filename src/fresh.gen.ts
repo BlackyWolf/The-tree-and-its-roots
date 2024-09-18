@@ -6,6 +6,7 @@ import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
+import * as $api_members_bulk from "./routes/api/members/bulk.ts";
 import * as $api_members_index from "./routes/api/members/index.ts";
 import * as $auth_middleware from "./routes/auth/_middleware.ts";
 import * as $auth_login from "./routes/auth/login.tsx";
@@ -16,9 +17,12 @@ import * as $trees_tid_edit from "./routes/trees/[tid]/edit.tsx";
 import * as $trees_tid_index from "./routes/trees/[tid]/index.tsx";
 import * as $trees_index from "./routes/trees/index.tsx";
 import * as $trees_new from "./routes/trees/new.tsx";
-import * as $Form from "./islands/Form.tsx";
 import * as $TestSignal from "./islands/TestSignal.tsx";
 import * as $TreeNamesSelect from "./islands/TreeNamesSelect.tsx";
+import * as $forms_Form from "./islands/forms/Form.tsx";
+import * as $forms_MemberRelationship from "./islands/forms/MemberRelationship.tsx";
+import * as $forms_Tags from "./islands/forms/Tags.tsx";
+import * as $forms_index from "./islands/forms/index.ts";
 import * as $index_1 from "./islands/index.ts";
 import * as $modals_Dialog from "./islands/modals/Dialog.tsx";
 import * as $modals_DialogShow from "./islands/modals/DialogShow.tsx";
@@ -31,6 +35,7 @@ const manifest = {
         "./routes/_app.tsx": $_app,
         "./routes/_layout.tsx": $_layout,
         "./routes/_middleware.ts": $_middleware,
+        "./routes/api/members/bulk.ts": $api_members_bulk,
         "./routes/api/members/index.ts": $api_members_index,
         "./routes/auth/_middleware.ts": $auth_middleware,
         "./routes/auth/login.tsx": $auth_login,
@@ -43,9 +48,12 @@ const manifest = {
         "./routes/trees/new.tsx": $trees_new,
     },
     islands: {
-        "./islands/Form.tsx": $Form,
         "./islands/TestSignal.tsx": $TestSignal,
         "./islands/TreeNamesSelect.tsx": $TreeNamesSelect,
+        "./islands/forms/Form.tsx": $forms_Form,
+        "./islands/forms/MemberRelationship.tsx": $forms_MemberRelationship,
+        "./islands/forms/Tags.tsx": $forms_Tags,
+        "./islands/forms/index.ts": $forms_index,
         "./islands/index.ts": $index_1,
         "./islands/modals/Dialog.tsx": $modals_Dialog,
         "./islands/modals/DialogShow.tsx": $modals_DialogShow,

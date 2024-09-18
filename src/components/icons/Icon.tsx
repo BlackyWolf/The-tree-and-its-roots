@@ -1,4 +1,4 @@
-import { joinCss } from "~utils";
+import { joinCss } from "~utils/css.ts";
 
 interface Properties {
     class?: string;

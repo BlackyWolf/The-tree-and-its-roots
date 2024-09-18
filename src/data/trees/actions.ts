@@ -4,9 +4,9 @@ export async function addTree(newTree: NewTree): Promise<Tree> {
     const db = await useDb();
 
     const result = await db.queryObject<Tree>(
-        "INSERT INTO trees (name, description, public, user_id) "
-        + "VALUES ($NAME, $DESCRIPTION, $PUBLIC, $USER_ID) "
-        + "RETURNING id",
+        `INSERT INTO trees (name, description, public, user_id)
+        VALUES ($NAME, $DESCRIPTION, $PUBLIC, $USER_ID)
+        RETURNING id`,
         {
             name: newTree.name,
             description: newTree.description,

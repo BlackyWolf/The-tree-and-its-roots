@@ -1,3 +1,4 @@
+import { formDataToObject } from "@blackywolf/formdata-to-object";
 import { ComponentChildren } from "preact";
 
 interface Properties {
@@ -17,7 +18,8 @@ export const Form = ({
         event.preventDefault();
 
         const formData = new FormData(event.target as HTMLFormElement);
-        const data = Object.fromEntries(formData);
+
+        const data = formDataToObject(formData);
 
         await fetch(api, {
             body: JSON.stringify(data),
@@ -26,6 +28,8 @@ export const Form = ({
             },
             method,
         });
+
+        window.location.reload();
     }
 
     return (

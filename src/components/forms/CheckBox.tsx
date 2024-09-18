@@ -1,10 +1,9 @@
 import { JSX } from "preact";
-import { FormErrors } from "~utils";
+import { FormErrors } from "~utils/forms.ts";
 
 interface Properties extends Omit<JSX.HTMLAttributes<HTMLInputElement>, "type"> {
     class?: string;
     errors?: FormErrors;
-    // icon?: IconProp;
     label: string;
 }
 

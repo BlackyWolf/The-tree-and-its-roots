@@ -1,5 +1,6 @@
 import { ComponentChildren } from "preact";
-import { Color, joinCss } from "~utils";
+import { joinCss } from "~utils/css.ts";
+import { Color } from "~utils/colors.ts";
 
 interface Properties {
     children: ComponentChildren;

@@ -1,5 +1,6 @@
-import { FormErrors, joinCss } from "~utils";
 import { Alert } from "~components";
+import { joinCss } from "~utils/css.ts";
+import { FormErrors } from "~utils/forms.ts";
 
 interface Properties {
     alert?: boolean;

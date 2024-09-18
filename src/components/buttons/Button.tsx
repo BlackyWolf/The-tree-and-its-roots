@@ -1,5 +1,6 @@
-import { Color, joinCss } from "~utils";
 import { ComponentChildren, JSX } from "preact";
+import { Color } from "~utils/colors.ts";
+import { joinCss } from "~utils/css.ts";
 
 type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 

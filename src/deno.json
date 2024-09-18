@@ -26,6 +26,7 @@
     "imports": {
         "$fresh/": "https://deno.land/x/fresh@1.6.8/",
         "$std/": "https://deno.land/std@0.216.0/",
+        "@blackywolf/formdata-to-object": "jsr:@blackywolf/formdata-to-object@^0.1.2",
         "@felix/argon2": "jsr:@felix/argon2@^1.0.7",
         "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
         "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
@@ -43,7 +44,8 @@
         "~components": "./components/index.ts",
         "~data": "./data/index.ts",
         "~islands": "./islands/index.ts",
-        "~utils": "./utilities/index.ts"
+        "~utils": "./utilities/index.ts",
+        "~utils/": "./utilities/"
     },
     "compilerOptions": {
         "jsx": "react-jsx",
